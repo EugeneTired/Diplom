@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Diplom_NovoAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Diplom_NovoAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AvaAddress" EntityType="Diplom_NovoAppModel.AvaAddress" />
+    <EntitySet Name="Clients" EntityType="Diplom_NovoAppModel.Clients" />
+    <EntitySet Name="ClientsExtra" EntityType="Diplom_NovoAppModel.ClientsExtra" />
+    <EntitySet Name="Contract" EntityType="Diplom_NovoAppModel.Contract" />
+    <EntitySet Name="Employee" EntityType="Diplom_NovoAppModel.Employee" />
+    <EntitySet Name="Equipment" EntityType="Diplom_NovoAppModel.Equipment" />
+    <EntitySet Name="Invoice" EntityType="Diplom_NovoAppModel.Invoice" />
+    <EntitySet Name="Role" EntityType="Diplom_NovoAppModel.Role" />
+    <EntitySet Name="Tariff" EntityType="Diplom_NovoAppModel.Tariff" />
+    <EntitySet Name="TariffType" EntityType="Diplom_NovoAppModel.TariffType" />
+    <AssociationSet Name="FK_Clients_Contract" Association="Diplom_NovoAppModel.FK_Clients_Contract">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientsExtra_Clients" Association="Diplom_NovoAppModel.FK_ClientsExtra_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="ClientsExtra" EntitySet="ClientsExtra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Employee" Association="Diplom_NovoAppModel.FK_Contract_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Equipment" Association="Diplom_NovoAppModel.FK_Contract_Equipment">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Tariff" Association="Diplom_NovoAppModel.FK_Contract_Tariff">
+      <End Role="Tariff" EntitySet="Tariff" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Contract" Association="Diplom_NovoAppModel.FK_Invoice_Contract">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Role" Association="Diplom_NovoAppModel.FK_Employee_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tariff_TariffType" Association="Diplom_NovoAppModel.FK_Tariff_TariffType">
+      <End Role="TariffType" EntitySet="TariffType" />
+      <End Role="Tariff" EntitySet="Tariff" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AvaAddress">
+    <Key>
+      <PropertyRef Name="AvaAddId" />
+    </Key>
+    <Property Name="AvaAddId" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="AvaAddName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Patron" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContractId" Type="Int32" />
+    <NavigationProperty Name="Contract" Relationship="Diplom_NovoAppModel.FK_Clients_Contract" FromRole="Clients" ToRole="Contract" />
+    <NavigationProperty Name="ClientsExtra" Relationship="Diplom_NovoAppModel.FK_ClientsExtra_Clients" FromRole="Clients" ToRole="ClientsExtra" />
+  </EntityType>
+  <EntityType Name="ClientsExtra">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clients" Relationship="Diplom_NovoAppModel.FK_ClientsExtra_Clients" FromRole="ClientsExtra" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="ContractId" />
+    </Key>
+    <Property Name="ContractId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TariffId" Type="Int32" Nullable="false" />
+    <Property Name="EquipmentId" Type="Int32" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="TermOfConcl" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Clients" Relationship="Diplom_NovoAppModel.FK_Clients_Contract" FromRole="Contract" ToRole="Clients" />
+    <NavigationProperty Name="Employee" Relationship="Diplom_NovoAppModel.FK_Contract_Employee" FromRole="Contract" ToRole="Employee" />
+    <NavigationProperty Name="Equipment" Relationship="Diplom_NovoAppModel.FK_Contract_Equipment" FromRole="Contract" ToRole="Equipment" />
+    <NavigationProperty Name="Tariff" Relationship="Diplom_NovoAppModel.FK_Contract_Tariff" FromRole="Contract" ToRole="Tariff" />
+    <NavigationProperty Name="Invoice" Relationship="Diplom_NovoAppModel.FK_Invoice_Contract" FromRole="Contract" ToRole="Invoice" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Patron" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Contract" Relationship="Diplom_NovoAppModel.FK_Contract_Employee" FromRole="Employee" ToRole="Contract" />
+    <NavigationProperty Name="Role" Relationship="Diplom_NovoAppModel.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="EquipmentId" />
+    </Key>
+    <Property Name="EquipmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Cost" Type="Decimal" Nullable="false" Precision="8" Scale="1" />
+    <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Contract" Relationship="Diplom_NovoAppModel.FK_Contract_Equipment" FromRole="Equipment" ToRole="Contract" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Cost" Type="Decimal" Nullable="false" Precision="8" Scale="1" />
+    <Property Name="ContrId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Contract" Relationship="Diplom_NovoAppModel.FK_Invoice_Contract" FromRole="Invoice" ToRole="Contract" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employee" Relationship="Diplom_NovoAppModel.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Tariff">
+    <Key>
+      <PropertyRef Name="TariffId" />
+    </Key>
+    <Property Name="TariffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyCost" Type="Decimal" Nullable="false" Precision="8" Scale="1" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdTariffType" Type="Int32" Nullable="false" />
+    <Property Name="Archived" Type="Boolean" />
+    <NavigationProperty Name="Contract" Relationship="Diplom_NovoAppModel.FK_Contract_Tariff" FromRole="Tariff" ToRole="Contract" />
+    <NavigationProperty Name="TariffType" Relationship="Diplom_NovoAppModel.FK_Tariff_TariffType" FromRole="Tariff" ToRole="TariffType" />
+  </EntityType>
+  <EntityType Name="TariffType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tariff" Relationship="Diplom_NovoAppModel.FK_Tariff_TariffType" FromRole="TariffType" ToRole="Tariff" />
+  </EntityType>
+  <Association Name="FK_Clients_Contract">
+    <End Type="Diplom_NovoAppModel.Contract" Role="Contract" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Diplom_NovoAppModel.Clients" Role="Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="ContractId" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="ContractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientsExtra_Clients">
+    <End Type="Diplom_NovoAppModel.Clients" Role="Clients" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Diplom_NovoAppModel.ClientsExtra" Role="ClientsExtra" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="ClientsExtra">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Employee">
+    <End Type="Diplom_NovoAppModel.Employee" Role="Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Diplom_NovoAppModel.Contract" Role="Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Equipment">
+    <End Type="Diplom_NovoAppModel.Equipment" Role="Equipment" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Diplom_NovoAppModel.Contract" Role="Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="EquipmentId" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="EquipmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Tariff">
+    <End Type="Diplom_NovoAppModel.Tariff" Role="Tariff" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Diplom_NovoAppModel.Contract" Role="Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tariff">
+        <PropertyRef Name="TariffId" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="TariffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Contract">
+    <End Type="Diplom_NovoAppModel.Contract" Role="Contract" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Diplom_NovoAppModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="ContractId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ContrId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Role">
+    <End Type="Diplom_NovoAppModel.Role" Role="Role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Diplom_NovoAppModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tariff_TariffType">
+    <End Type="Diplom_NovoAppModel.TariffType" Role="TariffType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Diplom_NovoAppModel.Tariff" Role="Tariff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TariffType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tariff">
+        <PropertyRef Name="IdTariffType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

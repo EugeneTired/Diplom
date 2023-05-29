@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a40cb3a187794e09a9f1d3c466f7f0dd" Name="Diagram1">
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.AvaAddress" Width="1.5" PointX="5.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.Clients" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.ClientsExtra" Width="1.5" PointX="9.75" PointY="1.25" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.Contract" Width="1.5" PointX="5.25" PointY="2" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.Employee" Width="1.5" PointX="3" PointY="2.125" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.Equipment" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.Invoice" Width="1.5" PointX="7.5" PointY="4.25" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.Role" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.Tariff" Width="1.5" PointX="3" PointY="9.75" />
+        <EntityTypeShape EntityType="Diplom_NovoAppModel.TariffType" Width="1.5" PointX="0.75" PointY="10.125" />
+        <AssociationConnector Association="Diplom_NovoAppModel.FK_Clients_Contract" />
+        <AssociationConnector Association="Diplom_NovoAppModel.FK_ClientsExtra_Clients" />
+        <AssociationConnector Association="Diplom_NovoAppModel.FK_Contract_Employee" />
+        <AssociationConnector Association="Diplom_NovoAppModel.FK_Contract_Equipment" />
+        <AssociationConnector Association="Diplom_NovoAppModel.FK_Contract_Tariff" />
+        <AssociationConnector Association="Diplom_NovoAppModel.FK_Invoice_Contract" />
+        <AssociationConnector Association="Diplom_NovoAppModel.FK_Employee_Role" />
+        <AssociationConnector Association="Diplom_NovoAppModel.FK_Tariff_TariffType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
